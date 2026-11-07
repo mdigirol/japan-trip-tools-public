@@ -32,6 +32,9 @@ jobs:
           CI: '1'
       - run: npm run build
         env:
+          # Where-to-buy relay for To buy: a public value, not a secret. The Anthropic key lives only
+          # in Cloudflare. See worker/shopping/README.md.
+          VITE_SHOPPING_URL: ${{ vars.SHOPPING_URL }}
           # Feedback relay (public repo only): public values, not secrets. Set as repo variables;
           # the GitHub token lives only in Cloudflare. See worker/feedback/README.md.
           VITE_FEEDBACK_URL: ${{ vars.FEEDBACK_URL }}

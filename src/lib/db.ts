@@ -1,6 +1,7 @@
-// IndexedDB: purchases, photos, the sync queue, and cached API results.
+// IndexedDB: purchases, photos, the sync queue, cached API results, and the To buy list.
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { Purchase } from '../data/schema';
+import type { Want } from './wants';
 import { DB_NAME } from './storageNames';
 
 export interface QueueEntry { id?: number; purchaseId: string; at: string }
@@ -11,18 +12,22 @@ interface CompanionDB extends DBSchema {
   photos: { key: string; value: { id: string; purchaseId: string; blob: Blob; at: string } };
   queue: { key: number; value: QueueEntry };
   cache: { key: string; value: CacheEntry };
+  wants: { key: string; value: Want };     // v2: the To buy list, this phone only
 }
 
 let dbp: Promise<IDBPDatabase<CompanionDB>> | null = null;
 
 export function db() {
   if (!dbp) {
-    dbp = openDB<CompanionDB>(DB_NAME, 1, {
-      upgrade(d) {
-        d.createObjectStore('purchases', { keyPath: 'id' });
-        d.createObjectStore('photos', { keyPath: 'id' });
-        d.createObjectStore('queue', { keyPath: 'id', autoIncrement: true });
-        d.createObjectStore('cache', { keyPath: 'key' });
+    dbp = openDB<CompanionDB>(DB_NAME, 2, {
+      upgrade(d, oldVersion) {
+        if (oldVersion < 1) {
+          d.createObjectStore('purchases', { keyPath: 'id' });
+          d.createObjectStore('photos', { keyPath: 'id' });
+          d.createObjectStore('queue', { keyPath: 'id', autoIncrement: true });
+          d.createObjectStore('cache', { keyPath: 'key' });
+        }
+        if (oldVersion < 2) d.createObjectStore('wants', { keyPath: 'id' });
       }
     });
   }

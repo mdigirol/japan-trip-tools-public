@@ -1,0 +1,19 @@
+# Where-to-buy relay for the To buy list. Setup and secrets: README.md in this folder.
+name = "jtc-shopping"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://mdigirol.github.io"
+MODEL = "claude-opus-5-5"
+
+# 10 lookups a minute per IP address, per Cloudflare location.
+[[ratelimits]]
+name = "LOOKUP_LIMITER"
+namespace_id = "1002"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60

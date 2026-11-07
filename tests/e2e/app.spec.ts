@@ -35,7 +35,7 @@ test('each MVP route renders', async ({ page }) => {
   page.on('pageerror', (e) => errors.push(e.message));
   for (const [hash, h1] of [['', 'Mon, Nov 2 · Osaka'], ['#/phrases', 'Phrases'], ['#/cards', 'Show cards'], ['#/etiquette', 'Etiquette'],
     ['#/currency', 'Currency'], ['#/emergency', 'Emergency'], ['#/more', 'More'], ['#/settings', 'Settings'], ['#/shopping', 'Shopping & tax-free'], ['#/purchases', 'Souvenirs & tax-free'],
-    ['#/konbini', 'Konbini'], ['#/decoder', 'Signs & menus'], ['#/transit', 'Transit'], ['#/numbers', 'Numbers']]) {
+    ['#/tobuy', 'To buy'], ['#/konbini', 'Konbini'], ['#/decoder', 'Signs & menus'], ['#/transit', 'Transit'], ['#/numbers', 'Numbers']]) {
     await page.goto(at('2026-11-02T08:00+09:00', hash));
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(h1);
   }
@@ -251,6 +251,48 @@ test('numbers reads prices aloud in romaji', async ({ page }) => {
 });
 
 // Public repo only (see CLAUDE.md, "Public-only features"). Do not copy into japan-trip-tools.
+// The e2e build points To buy at https://shopping.test/ (playwright.config.ts); this routes it.
+test('to buy: an item added offline is looked up once online, and shows on Today in that area', async ({ page, context }) => {
+  const asked: Record<string, unknown>[] = [];
+  await page.route(/shopping\.test/, async (r) => {
+    asked.push(JSON.parse(r.request().postData()!));
+    await r.fulfill({ status: 200, headers: { 'Access-Control-Allow-Origin': '*' }, contentType: 'application/json', body: JSON.stringify({
+      ok: true, advice: { summary: 'Buy from a tea specialist, not a souvenir stall.', places: [{ name: 'Ippodo Tea', area: 'kyoto-downtown', why: 'Wide range of grades.' }] }
+    }) });
+  });
+  await page.goto(at('2026-10-28T09:00+09:00', '#/tobuy'));
+  await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+
+  await context.setOffline(true);
+  await page.getByLabel('Item').fill('Ceremonial matcha');
+  await page.getByLabel('Note (optional)').fill('Two tins');
+  await page.getByRole('button', { name: 'Add to list' }).click();
+  await expect(page.getByText('Looking up where to buy…')).toBeVisible();
+  await expect(page.getByText('1 waiting for a connection')).toBeVisible();
+  expect(asked).toHaveLength(0);
+
+  await context.setOffline(false);
+  await expect(page.getByText('Ippodo Tea')).toBeVisible();
+  await expect(page.getByTestId('advice')).toContainText('Downtown Kyoto');
+  expect(asked[0]).toMatchObject({ item: 'Ceremonial matcha', note: 'Two tins' });
+  expect((asked[0].areas as { slug: string }[]).map((a) => a.slug)).toContain('kyoto-downtown');
+
+  await page.goto(at('2026-10-28T09:00+09:00'));
+  await expect(page.getByTestId('tobuy-hint')).toContainText('Ceremonial matcha: Ippodo Tea');
+  await page.goto(at('2026-11-02T09:00+09:00'));         // Osaka: nothing on the list for here
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mon, Nov 2 · Osaka');
+  await expect(page.getByTestId('tobuy-hint')).toHaveCount(0);
+
+  await page.goto(at('2026-10-28T09:00+09:00', '#/tobuy'));
+  await page.getByLabel('Found: Ceremonial matcha').check();
+  await expect(page.getByText('Everything’s found.')).toBeVisible();
+  await page.locator('summary', { hasText: 'Found' }).click();
+  await page.getByRole('link', { name: 'Log the purchase' }).click();
+  await expect(page.locator('input[name=item]')).toHaveValue('Ceremonial matcha');
+});
+
 // The e2e build points the form at https://feedback.test/ (playwright.config.ts); this routes it.
 test('feedback on More sends a note, and holds one written offline', async ({ page, context }) => {
   const sent: Record<string, unknown>[] = [];

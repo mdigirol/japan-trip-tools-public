@@ -27,7 +27,7 @@ export function Purchases({ route }: { route: Route }) {
         {tabs.map(([id, label]) => <a key={id} class={'chip' + (view === id ? ' on' : '')} href={href('purchases', { view: id })}>{label}</a>)}
       </div>
       {list === null ? <div class="empty">Loading…</div>
-        : view === 'add' ? <AddForm key={editId ?? 'new'} existing={editing} />
+        : view === 'add' ? <AddForm key={editId ?? 'new'} existing={editing} initialItem={route.params.get('item') ?? ''} />
           : view === 'claim' ? <ClaimLog list={list} checklist={route.params.get('check') === '1'} />
             : <Souvenirs list={list} />}
     </div>
@@ -151,12 +151,12 @@ function PhotoThumb({ id }: { id: string }) {
   return url ? <img src={url} alt="Purchase photo" style="width:72px;height:72px;object-fit:cover;border-radius:10px" /> : null;
 }
 
-function AddForm({ existing }: { existing?: Purchase }) {
+function AddForm({ existing, initialItem = '' }: { existing?: Purchase; initialItem?: string }) {
   const s = useSettings();
   const st = todayState(now());
   const todayPlace = (st.day?.places[0] ?? 'tokyo') as Place;
   const [f, setF] = useState<Purchase>(() => existing ?? {
-    id: uuid(), createdAt: '', updatedAt: '', by: s.who, item: '', shop: '', place: todayPlace,
+    id: uuid(), createdAt: '', updatedAt: '', by: s.who, item: initialItem, shop: '', place: todayPlace,
     date: tokyo(now()).ymd, priceYen: 0, forWhom: [], taxFree: false, receiptKept: true, bag: s.bags[0], photoIds: []
   });
   const [price, setPrice] = useState(existing ? String(existing.priceYen) : '');

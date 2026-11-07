@@ -14,6 +14,7 @@ import { cachedWeather, cToF, refreshWeather, type CityWeather } from '../lib/we
 import { stamp } from '../lib/now';
 import { Tiles } from '../components/Tiles';
 import { UnclaimedNotice } from '../components/UnclaimedNotice';
+import { areaLabel, todayWants, useWants } from '../lib/wants';
 
 export function Today() {
   const st = todayState(now());
@@ -82,6 +83,7 @@ function DayBody({ st }: { st: TodayState }) {
       {day.note && !preview && <div class="card tight small">{day.note}</div>}
       <Weather ymd={ymd} day={preview ? undefined : shownDay} />
       {previewDay && <Hoods day={previewDay} />}
+      {shownDay && <ToBuyHint day={shownDay} />}
       <Hotels st={st} />
       {st.flightHome && <UnclaimedNotice nov27 />}
       {itineraryLink && (
@@ -195,6 +197,23 @@ function Hoods({ day }: { day: NonNullable<TodayState['day']> }) {
           </div>
         );
       })}
+    </section>
+  );
+}
+
+// Items on the To buy list with a suggested place in today's neighborhoods or cities. No stop names or times.
+function ToBuyHint({ day }: { day: NonNullable<TodayState['day']> }) {
+  const list = useWants();
+  const hits = list ? todayWants(list, day) : [];
+  if (!hits.length) return null;
+  return (
+    <section data-testid="tobuy-hint">
+      <h2>On your to-buy list</h2>
+      <a class="card card-btn" href={href('tobuy')} style="color:inherit;text-decoration:none">
+        <ul class="list-plain small" style="margin:0">{hits.map(({ want, place }) => (
+          <li key={want.id}><b>{want.item}</b>: {place.name} <span class="muted">· {areaLabel(place.area)}</span></li>
+        ))}</ul>
+      </a>
     </section>
   );
 }

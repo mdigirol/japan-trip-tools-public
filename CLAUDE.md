@@ -35,7 +35,7 @@ Changes here are often copied into the private `japan-trip-tools`. These belong 
 - The app reads `data/local/trip.json` and `data/local/konbini-near-stops.json` when `data/local/trip.json` exists, otherwise `data/sample/`. Files are never mixed. Code imports them as `@data/<file>` (`scripts/build-env.ts`).
 - `data/local/` is untracked in this repo. A repo that deliberately tracks its own itinerary there (a personal companion that merges this one) opts in by committing an empty `data/local/.tracked-ok`.
 - Scenario tests (Today, content, konbini) and the e2e build always use `data/sample/`, so they pass in any repo. `tests/unit/trip.test.ts` checks both the sample and the active data.
-- Optional build-time settings, set in a `.env` file or the environment: `VITE_DATA_REPO` (turns purchase sync on) and `VITE_ITINERARY_URL` (shows "Open this day in the itinerary" on Today). Public repo only: `VITE_FEEDBACK_URL` and `VITE_TURNSTILE_SITE_KEY` (the feedback relay).
+- Optional build-time settings, set in a `.env` file or the environment: `VITE_DATA_REPO` (turns purchase sync on), `VITE_ITINERARY_URL` (shows "Open this day in the itinerary" on Today) and `VITE_SHOPPING_URL` (where-to-buy suggestions on To buy, from `worker/shopping/`). Public repo only: `VITE_FEEDBACK_URL` and `VITE_TURNSTILE_SITE_KEY` (the feedback relay).
 - The base path is the repo name on Pages (`GITHUB_REPOSITORY`), else the folder name. Override with `BASE_PATH`.
 
 ## Code
@@ -46,6 +46,7 @@ Changes here are often copied into the private `japan-trip-tools`. These belong 
 - Today's logic lives in `src/lib/trip.ts` (`todayState`). Today shows no stop names or times from the itinerary.
 - Storage: IndexedDB via `src/lib/db.ts` (purchases, photos, sync queue, API cache); `localStorage` via `src/lib/settings.ts` (try/catch).
 - Sync (`src/lib/sync.ts`): pull, merge (last write wins by `updatedAt`), then push the queue. Photos never sync.
+- To buy (`src/lib/wants.ts`): per phone only, never synced. Each item is looked up once through the `worker/shopping` relay (Claude) and the answer is saved on it. Pending items retry on add, app start, coming online, returning to the foreground, and every 5 minutes while open. The Worker's Anthropic key is a Cloudflare secret only.
 - Service worker: `vite-plugin-pwa` (generateSW) in `vite.config.ts`. Live APIs (rates, weather, Overpass) are network-first with cache fallback; GitHub is never cached.
 - Every phone-facing screen must work at 375 px wide, in both themes, with the network off. Tap targets ≥ 44 px.
 

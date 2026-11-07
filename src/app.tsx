@@ -16,6 +16,7 @@ import { Phrases } from './routes/Phrases';
 import { Purchases } from './routes/Purchases';
 import { Settings } from './routes/Settings';
 import { Shopping } from './routes/Shopping';
+import { ToBuy } from './routes/ToBuy';
 import { Today } from './routes/Today';
 import { Transit } from './routes/Transit';
 import { Units } from './routes/Units';
@@ -42,6 +43,7 @@ export function App() {
     case 'settings': page = <Settings />; break;
     case 'shopping': page = <Shopping />; break;
     case 'purchases': page = <Purchases route={route} />; break;
+    case 'tobuy': page = <ToBuy />; break;
     case 'konbini': page = <Konbini route={route} />; break;
     case 'decoder': page = <Decoder />; break;
     case 'transit': page = <Transit />; break;

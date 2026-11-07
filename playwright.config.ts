@@ -11,7 +11,7 @@ export default defineConfig({
   webServer: {
     command: 'npx vite build --outDir dist-e2e && npx vite preview --outDir dist-e2e --port 4173 --strictPort',
     // No sync repo, a fake feedback relay (routed in the test) and no Turnstile, whatever a local .env says.
-    env: { TRIP_DATA: 'sample', VITE_DATA_REPO: '', VITE_FEEDBACK_URL: 'https://feedback.test/', VITE_TURNSTILE_SITE_KEY: '' },
+    env: { TRIP_DATA: 'sample', VITE_DATA_REPO: '', VITE_SHOPPING_URL: 'https://shopping.test/', VITE_FEEDBACK_URL: 'https://feedback.test/', VITE_TURNSTILE_SITE_KEY: '' },
     port: 4173,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000

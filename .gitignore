@@ -10,3 +10,5 @@ playwright-report/
 .DS_Store
 # Real itinerary data. Untracked here on purpose; see tests/unit/data-local.test.ts
 data/local/
+# Wrangler local secrets (worker/*/.dev.vars)
+.dev.vars*
