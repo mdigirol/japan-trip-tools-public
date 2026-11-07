@@ -13,7 +13,7 @@ export const MODULES: ModuleInfo[] = [
   { path: 'decoder', label: 'Signs & menus', short: 'Signs', ic: '🔤', blurb: 'Decode words', ready: true },
   { path: 'transit', label: 'Transit', ic: '🚄', blurb: 'Tickets, IC cards, taxis', ready: true },
   { path: 'numbers', label: 'Numbers', ic: '🔢', blurb: 'Prices aloud, counters', ready: true },
-  { path: 'units', label: 'Units', ic: '📏', blurb: '°C/°F, km/mi, g/oz', ready: true },
+  { path: 'units', label: 'Units', ic: '📏', blurb: '°C/°F, kg/lb, mL/fl oz', ready: true },
   { path: 'shopping', label: 'Shopping', ic: '🧾', blurb: 'Tax-free rules, sizes', ready: true },
   { path: 'settings', label: 'Settings', ic: '⚙️', blurb: 'Name, units, sync', ready: true }
 ];

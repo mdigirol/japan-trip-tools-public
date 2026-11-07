@@ -1,29 +1,37 @@
 import { useState } from 'preact/hooks';
 import { CLOTHING, shoeCm } from '../data/money';
-import { cToF, fToC } from '../lib/weather';
+import { UNIT_GROUPS, convertInput, type UnitPair } from '../lib/units';
 
-const PAIRS = [
-  { id: 'temp', a: '°C', b: '°F', ab: cToF, ba: fToC },
-  { id: 'dist', a: 'km', b: 'mi', ab: (x: number) => x * 0.621371, ba: (x: number) => x / 0.621371 },
-  { id: 'mass', a: 'g', b: 'oz', ab: (x: number) => x / 28.3495, ba: (x: number) => x * 28.3495 }
-];
-
-function Pair({ p }: { p: typeof PAIRS[number] }) {
+function Pair({ p }: { p: UnitPair }) {
   const [a, setA] = useState(''), [b, setB] = useState('');
-  const r = (x: number) => String(Math.round(x * 10) / 10);
   return (
-    <div class="row" style="margin:8px 0">
-      <label class="grow"><span class="sr">{p.a}</span>
-        <input type="number" inputMode="decimal" placeholder={p.a} value={a} onInput={(e) => { const v = e.currentTarget.value; setA(v); setB(v === '' ? '' : r(p.ab(+v))); }} /></label>
+    <div class="row unit-pair" data-testid={`unit-${p.id}`}>
+      <label class="grow unit-box">
+        <input type="number" inputMode="decimal" aria-label={p.a} value={a}
+          onInput={(e) => { const v = e.currentTarget.value; setA(v); setB(convertInput(v, p.ab)); }} />
+        <span aria-hidden="true">{p.a}</span>
+      </label>
       <span aria-hidden="true">⇄</span>
-      <label class="grow"><span class="sr">{p.b}</span>
-        <input type="number" inputMode="decimal" placeholder={p.b} value={b} onInput={(e) => { const v = e.currentTarget.value; setB(v); setA(v === '' ? '' : r(p.ba(+v))); }} /></label>
+      <label class="grow unit-box">
+        <input type="number" inputMode="decimal" aria-label={p.b} value={b}
+          onInput={(e) => { const v = e.currentTarget.value; setB(v); setA(convertInput(v, p.ba)); }} />
+        <span aria-hidden="true">{p.b}</span>
+      </label>
     </div>
   );
 }
 
 export function Measurements() {
-  return <div class="card">{PAIRS.map((p) => <Pair p={p} key={p.id} />)}</div>;
+  return (
+    <>
+      {UNIT_GROUPS.map((g) => (
+        <section class="card" key={g.id} aria-labelledby={`units-${g.id}`}>
+          <h3 id={`units-${g.id}`}>{g.title}</h3>
+          {g.pairs.map((p) => <Pair p={p} key={p.id} />)}
+        </section>
+      ))}
+    </>
+  );
 }
 
 export function Sizes() {

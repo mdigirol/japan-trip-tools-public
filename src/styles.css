@@ -113,6 +113,12 @@ input[type="text"], input[type="search"], input[type="number"], input[type="pass
   background-color: var(--surface); font-size: max(16px, 1em);
 }
 label.field { display: block; margin: 12px 0; }
+
+/* ---- units: the unit name stays visible inside each box ---- */
+.unit-pair + .unit-pair { margin-top: 8px; }
+.unit-box { position: relative; display: block; }
+.unit-box input { padding-right: 3.6em; }
+.unit-box > span { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
 label.field > span { display: block; font-size: .85em; color: var(--muted); margin-bottom: 4px; }
 .toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; }
 .toggle input { width: 26px; height: 26px; accent-color: var(--accent); }
