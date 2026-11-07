@@ -116,8 +116,13 @@ test('currency says "Set a rate" with no rate, and works with a manual one', asy
 test('units has its own screen', async ({ page }) => {
   await page.goto(at('2026-11-02T08:00+09:00', '#/units'));
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Units');
-  await page.getByPlaceholder('°C').fill('20');
-  await expect(page.getByPlaceholder('°F')).toHaveValue('68');
+  await page.getByLabel('°C', { exact: true }).fill('20');
+  await expect(page.getByLabel('°F', { exact: true })).toHaveValue('68');
+  await page.getByLabel('kg', { exact: true }).fill('23');
+  await expect(page.getByLabel('lb', { exact: true })).toHaveValue('50.7');
+  await page.getByLabel('fl oz', { exact: true }).fill('12');
+  await expect(page.getByLabel('mL', { exact: true })).toHaveValue('354.9');
+  for (const h of ['Temperature', 'Weight', 'Volume', 'Length']) await expect(page.getByRole('heading', { name: h })).toBeVisible();
 });
 
 test('tool order in Settings drives the tiles and the bottom bar', async ({ page }) => {
