@@ -13,7 +13,7 @@ export interface Env {
 }
 
 // Not exported: Workers treats every named export of the entry file as an entrypoint, so a string export stops it starting.
-const DEFAULT_MODEL = 'claude-opus-5-5';
+const DEFAULT_MODEL = 'claude-sonnet-5-5';
 
 // The one call to Claude, swappable in tests.
 export type Ask = (env: Env, req: LookupRequest) => Promise<{ advice: WantAdvice | null; refused: boolean }>;
@@ -22,9 +22,9 @@ export const askClaude: Ask = async (env, req) => {
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 60_000 });
   const msg = await client.beta.messages.parse({
     model: env.MODEL || DEFAULT_MODEL,
-    max_tokens: 4000,
-    // A short, factual lookup: low effort keeps it quick and cheap.
-    output_config: { effort: 'low', format: betaZodOutputFormat(WantAdvice) },
+    max_tokens: 8000,   // room for medium-effort thinking plus the answer
+    // Medium effort: a little reasoning about which trip areas fit, without the cost of high.
+    output_config: { effort: 'medium', format: betaZodOutputFormat(WantAdvice) },
     // If a safety classifier declines, the API reruns the request on its recommended fallback model.
     betas: ['server-side-fallback-2026-07-01'],
     fallbacks: 'default',

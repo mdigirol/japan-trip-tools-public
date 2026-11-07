@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { db } from '../../src/lib/db';
-import { cleanRequest, PLACES_MAX, tidyAdvice, tripAreas, userPrompt, type WantAdvice } from '../../src/lib/wantAdvice';
+import { cleanRequest, PLACES_MAX, shorten, tidyAdvice, tripAreas, userPrompt, type WantAdvice } from '../../src/lib/wantAdvice';
 import { allWants, applyResult, AREAS, lookupWant, MAX_TRIES, newWant, runWants, saveWant, todayWants, type Want } from '../../src/lib/wants';
 import { trip } from '../../src/lib/trip';
 import { handle, type Ask, type Env } from '../../worker/shopping/src/index';
@@ -39,6 +39,17 @@ describe('request and answer cleanup', () => {
     expect(t.places).toHaveLength(PLACES_MAX);
     expect(t.places.map((p) => p.area)).toEqual(['gion', 'anywhere', 'anywhere']);
     expect(t.summary).toBe('s');
+  });
+  it('shortens long text at a sentence or a word, never mid-word', () => {
+    expect(shorten('Short.', 50)).toBe('Short.');
+    const two = 'Dozens of knife shops line the street here. Bring your passport for tax-free.';
+    expect(shorten(two, 60)).toBe('Dozens of knife shops line the street here.');
+    const one = 'Dozens of knife shops, with many gyuto in the mid range and engraving';
+    const s = shorten(one, 40);
+    expect(s.endsWith('…')).toBe(true);
+    expect(s.length).toBeLessThanOrEqual(40);
+    expect(one.startsWith(s.slice(0, -1))).toBe(true);
+    expect(one[s.length - 1]).toBe(' ');   // the cut falls between words
   });
 });
 

@@ -10,7 +10,7 @@ What it checks, in order:
 2. No more than 10 lookups a minute from one IP address.
 3. The item is 1–120 characters and the note at most 300.
 
-Model: `claude-opus-5-5` at low effort, set by `MODEL` in `wrangler.toml`. A lookup is a few thousand tokens at most, so a cent or two each. If a safety classifier declines an item, the API retries it on its recommended fallback model (`fallbacks: "default"`). If that also declines, the app shows "No suggestion for this one."
+Model: `claude-sonnet-5-5` at medium effort, set by `MODEL` in `wrangler.toml` (effort is in `src/index.ts`). A lookup is a few thousand tokens, so a cent or two each. If a safety classifier declines an item, the API retries some kinds of decline on its recommended fallback model (`fallbacks: "default"`). If that also declines, the app shows "No suggestion for this one."
 
 The Anthropic API key lives only in Cloudflare as a secret. It's never in this repo, the app or the deploy workflow.
 

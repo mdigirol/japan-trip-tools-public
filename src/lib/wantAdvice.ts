@@ -37,6 +37,22 @@ export function tripAreas(trip: TripFile): Area[] {
 const clip = (v: unknown, n: number) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, n) : '');
 const SLUG = /^[a-z0-9-]{1,40}$/;
 
+// Shortens model text to n characters without cutting a word: at the last full sentence if that keeps
+// at least half, else at the last word, with an ellipsis.
+export function shorten(v: string, n: number): string {
+  const t = v.replace(/\s+/g, ' ').trim();
+  if (t.length <= n) return t;
+  const head = t.slice(0, n);
+  const end = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '));
+  if (end >= n / 2) return head.slice(0, end + 1);
+  const sp = head.slice(0, n - 1).lastIndexOf(' ');
+  return (sp > 0 ? head.slice(0, sp) : head.slice(0, n - 1)).replace(/[\s,;:]+$/, '') + '…';
+}
+
+export const SUMMARY_MAX = 400;
+export const NAME_MAX = 100;
+export const WHY_MAX = 200;
+
 // Checks and trims a request body. Returns null when it can't be used.
 export function cleanRequest(b: unknown): LookupRequest | null {
   if (!b || typeof b !== 'object') return null;
@@ -57,7 +73,8 @@ Prefer places in the areas they are visiting, listed below. Name a well-known ch
 Say when an item is easy to find anywhere (konbini, drugstores, Don Quijote) or hard to find.
 Mention tax-free when it matters, and any rule that affects bringing the item home to the US (liquids, knives, food).
 Don't invent store names or addresses. If you aren't sure a specific store exists, name the type of store instead.
-Write plain, short American English. The summary is one or two sentences. Give at most ${PLACES_MAX} places.
+Write plain, short American English. The summary is one or two sentences, under ${SUMMARY_MAX - 100} characters. Give at most ${PLACES_MAX} places.
+Keep each place's name under ${NAME_MAX - 20} characters and its "why" to one or two short sentences, under ${WHY_MAX - 40} characters.
 For each place, "area" must be one of the given area slugs, or "anywhere" when it isn't tied to one.`;
 
 export function userPrompt(r: LookupRequest): string {
@@ -69,11 +86,11 @@ export function userPrompt(r: LookupRequest): string {
 export function tidyAdvice(a: WantAdvice, areas: Area[]): WantAdvice {
   const known = new Set(areas.map((x) => x.slug));
   return {
-    summary: a.summary.trim().slice(0, 400),
+    summary: shorten(a.summary, SUMMARY_MAX),
     places: a.places.slice(0, PLACES_MAX).map((p) => ({
-      name: p.name.trim().slice(0, 80),
+      name: shorten(p.name, NAME_MAX),
       area: known.has(p.area) ? p.area : 'anywhere',
-      why: p.why.trim().slice(0, 200)
+      why: shorten(p.why, WHY_MAX)
     })).filter((p) => p.name)
   };
 }
