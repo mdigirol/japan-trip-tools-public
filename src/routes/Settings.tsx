@@ -90,10 +90,10 @@ export function Settings() {
       <h2>Tool order</h2>
       <ToolOrder order={s.toolOrder} onChange={(l) => set({ toolOrder: l })} />
 
-      <h2>Souvenirs</h2>
+      <h2>Purchases</h2>
       <div class="card">
-        <ListEditor label="Souvenir recipients" items={s.recipients} onChange={(l) => set({ recipients: l })} placeholder="Add a name" />
-        <ListEditor label="Bags (for the claim log)" items={s.bags} onChange={(l) => set({ bags: l })} placeholder="Add a bag" />
+        <ListEditor label="People you’re buying for" items={s.recipients} onChange={(l) => set({ recipients: l })} placeholder="Add a name" />
+        <ListEditor label="Bags (for the tax refund log)" items={s.bags} onChange={(l) => set({ bags: l })} placeholder="Add a bag" />
         <p class="small faint">{DATA_REPO ? 'Names stay on this phone and in the private sync repo.' : 'Names stay on this phone.'} They’re never in the public site.</p>
       </div>
 
@@ -107,7 +107,7 @@ export function Settings() {
                 onInput={(e) => set({ syncToken: e.currentTarget.value.trim() })} />
               <button class="btn" onClick={() => setShowToken(!showToken)}>{showToken ? 'Hide' : 'Show'}</button>
             </div></label>
-          <p class="small faint">Stored only on this phone. Paste it once. Only souvenirs and claim-log items sync; photos stay on the phone that took them.</p>
+          <p class="small faint">Stored only on this phone. Paste it once. Only purchases sync; photos stay on the phone that took them.</p>
         </div>
       </>}
 

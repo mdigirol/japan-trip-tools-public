@@ -7,7 +7,7 @@ export function Shopping() {
   const knives = glossary.filter((g) => g.category === 'knife');
   return (
     <div>
-      <h1>Shopping & tax-free</h1>
+      <h1>Shopping guide</h1>
       <h2>Tax-free from Nov 1, 2026</h2>
       <div class="card">
         <p><b>Timing matters.</b> Through Oct 31, 2026 the old tax-free process applies. For eligible purchases from Nov 1, 2026, Japan refunds the tax at departure instead of taking it off at the shop.</p>
@@ -15,7 +15,7 @@ export function Shopping() {
         <p class="small">Source: <a href={JNTO_TAX_FREE_URL} target="_blank" rel="noopener">JNTO: Changes are coming to Japan’s tax-free shopping ↗</a></p>
         <p class="small faint">Check the Japan Tourism Agency’s final procedure before the trip.</p>
       </div>
-      <a class="btn primary block" style="margin-top:10px" href={href('purchases', { view: 'claim' })}>Open the claim log →</a>
+      <a class="btn primary block" style="margin-top:10px" href={href('purchases', { view: 'claim' })}>Open the tax refund log →</a>
 
       <h2>Worth buying</h2>
       <div class="card"><ul class="list-plain small">{WORTH_BUYING.map((w) => <li key={w}>{w}</li>)}</ul></div>
