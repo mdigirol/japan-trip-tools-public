@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { BOTTLES_GLASSES, PEOPLE, readTime, readYen, THINGS } from '../lib/numbers';
+import { BOTTLES, GLASSES, PEOPLE, readTime, readYen, THINGS } from '../lib/numbers';
 import { speak } from '../lib/speech';
 
 export function Numbers() {
@@ -35,16 +35,18 @@ export function Numbers() {
       </div>
       <h2>Counting</h2>
       <Counter title="People (for a table)" rows={PEOPLE} />
-      <Counter title="Things (pointing at the menu)" rows={THINGS} />
-      <Counter title="Bottles / glasses" rows={BOTTLES_GLASSES} />
+      <Counter title="Things (pointing at the menu)" rows={THINGS} note="Most other things. Kore o futatsu kudasai: two of these, please." />
+      <Counter title="Bottles, cans, skewers (-hon)" rows={BOTTLES} note="Biiru o nihon kudasai: two bottles of beer, please. Pointing works too: nihon kudasai." />
+      <Counter title="Glasses, cups, bowls (-hai)" rows={GLASSES} note="Nama o nihai kudasai: two draft beers, please. Mou ippai: one more." />
     </div>
   );
 }
 
-function Counter({ title, rows }: { title: string; rows: string[][] }) {
+function Counter({ title, rows, note }: { title: string; rows: string[][]; note?: string }) {
   return (
     <div class="card">
       <h3>{title}</h3>
+      {note && <p class="small muted">{note}</p>}
       <table class="tbl"><tbody>{rows.map(([n, r, k]) => (
         <tr key={n} onClick={() => speak(k)} style="cursor:pointer"><td style="width:2.5em;font-weight:700">{n}</td><td><i>{r}</i></td><td lang="ja" class="muted">{k}</td></tr>
       ))}</tbody></table>
