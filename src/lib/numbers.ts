@@ -82,6 +82,10 @@ export const THINGS = [
   ['1', 'hitotsu', 'ひとつ'], ['2', 'futatsu', 'ふたつ'], ['3', 'mittsu', 'みっつ'], ['4', 'yottsu', 'よっつ'], ['5', 'itsutsu', 'いつつ'],
   ['6', 'muttsu', 'むっつ'], ['7', 'nanatsu', 'ななつ'], ['8', 'yattsu', 'やっつ'], ['9', 'kokonotsu', 'ここのつ'], ['10', 'too', 'とお']
 ];
-export const BOTTLES_GLASSES = [
-  ['1', 'ippon / ippai', 'いっぽん / いっぱい'], ['2', 'nihon / nihai', 'にほん / にはい'], ['3', 'sanbon / sanbai', 'さんぼん / さんばい']
+// -hon counts long, thin things: bottles, cans, skewers. -hai counts glasses, cups and bowls.
+export const BOTTLES = [
+  ['1', 'ippon', 'いっぽん'], ['2', 'nihon', 'にほん'], ['3', 'sanbon', 'さんぼん'], ['4', 'yonhon', 'よんほん'], ['5', 'gohon', 'ごほん']
+];
+export const GLASSES = [
+  ['1', 'ippai', 'いっぱい'], ['2', 'nihai', 'にはい'], ['3', 'sanbai', 'さんばい'], ['4', 'yonhai', 'よんはい'], ['5', 'gohai', 'ごはい']
 ];
