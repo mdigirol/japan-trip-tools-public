@@ -23,7 +23,9 @@ Priority marks for the MVP set: ★ = must ship.
 | Where am I? (pointing at a map) | ここはどこですか？ | Koko wa doko desu ka? | [N] | |
 | Could you write it down? | 書いていただけますか？ | Kaite itadakemasu ka? | [V] | For prices, times, addresses. |
 | Sorry, I don't speak Japanese | すみません、日本語が話せません | Sumimasen, nihongo ga hanasemasen | [V] | |
-| Good morning / Hello / Good evening | おはようございます / こんにちは / こんばんは | Ohayou gozaimasu / Konnichiwa / Konbanwa | [N] | |
+| Good morning | おはようございます | Ohayou gozaimasu | [N] | Until about 10 or 11 am. |
+| Hello | こんにちは | Konnichiwa | [N] | |
+| Good evening | こんばんは | Konbanwa | [N] | |
 | Please speak slowly | ゆっくり話してください | Yukkuri hanashite kudasai | [V] | |
 | Got it / understood | わかりました | Wakarimashita | [V] | |
 | Do you have a moment? | ちょっといいですか？ | Chotto ii desu ka? | [V] | A soft way to start a question. |
@@ -41,8 +43,10 @@ Small talk with people you meet. Casual lines are marked.
 | English | Japanese | Romaji | Tag | Note |
 | --- | --- | --- | --- | --- |
 | Nice to meet you | はじめまして。よろしくお願いします | Hajimemashite. Yoroshiku onegaishimasu | [V] | |
-| How are you? / I'm fine | お元気ですか？ / 元気です | Ogenki desu ka? / Genki desu | [V] | Not a daily greeting. Use it with someone you know. |
-| See you later | またね / また後で | Mata ne / Mata ato de | [V] | Casual. For friends, not staff. |
+| How are you? | お元気ですか？ | Ogenki desu ka? | [V] | Not a daily greeting. Use it with someone you know. |
+| I'm fine (answer to how are you) | 元気です | Genki desu | [V] | |
+| See you! | またね | Mata ne | [V] | Casual. For friends, not staff. |
+| See you later (today) | また後で | Mata ato de | [V] | Casual. For friends, not staff. |
 | I see | なるほど | Naruhodo | [V] | |
 | That's true / yeah | そうですね | Sou desu ne | [V] | |
 | Is that so? | そうですか | Sou desu ka | [V] | Said with a falling tone, it just means "oh, I see." |
@@ -54,8 +58,14 @@ Small talk with people you meet. Casual lines are marked.
 | I'm happy | 嬉しいです | Ureshii desu | [V] | |
 | No, no, I still have a long way to go | いやいや、まだまだです | Iya iya, mada mada desu | [V] | The reply when told your Japanese is good. Or: "Zenzen shaberemasen" (I can barely speak it). |
 | Good work / thanks for today | お疲れ様です | Otsukaresama desu | [V] | After work or a long day. Friends say "Otsukare!" as a toast. |
-| Awesome! (slang) | やばい / 最高 / すごい / 神 / エグい / 神ってる | Yabai / Saikou / Sugoi / Kami / Egui / Kamitteru | [V] | Casual. Yabai = crazy, good or bad. Kami = godlike. Egui = intense. Kamitteru = on fire. |
-| (Silly) Smart white guy / I'm not a bad white guy | 頭いい白人 / 悪い白人じゃないよ | Atama ii hakujin / Warui hakujin janai yo | [V] | A joke about yourself. Friends only. |
+| Crazy! (slang) | やばい | Yabai | [V] | Casual. Good or bad, from the tone. |
+| The best! | 最高 | Saikou | [V] | Casual. |
+| Amazing! | すごい | Sugoi | [V] | Casual. Works for almost anything. |
+| Godlike (slang) | 神 | Kami | [V] | Casual. For something perfect. |
+| Intense! (slang) | エグい | Egui | [V] | Casual. |
+| On fire! (slang) | 神ってる | Kamitteru | [V] | Casual. Someone on a roll. |
+| (Silly) Smart white guy | 頭いい白人 | Atama ii hakujin | [V] | A joke about yourself. Friends only. |
+| (Silly) I'm not a bad white guy | 悪い白人じゃないよ | Warui hakujin janai yo | [V] | A joke about yourself. Friends only. |
 | (Silly) I get it, I'm an alcoholic | わかる、アル中だから | Wakaru, aruchuu dakara | [V] | A drinking joke. Friends only. |
 
 ## Restaurant and izakaya
@@ -76,8 +86,11 @@ Small talk with people you meet. Casual lines are marked.
 | It was delicious | おいしかったです | Oishikatta desu | [N] | "Oishii!" mid-meal works too. |
 | Thank you for the meal (leaving) | ごちそうさまでした | Gochisousama deshita | [N] | |
 | (Before eating) | いただきます | Itadakimasu | [V] | |
-| For here / to go | 店内で / 持ち帰りで | Tennai de / Mochikaeri de | [N] | |
-| Table / counter / tatami seating | テーブル席 / カウンター席 / 座敷 | Teeburu seki / Kauntaa seki / Zashiki | [V] | Add "de onegaishimasu" to ask for one. Zashiki means shoes off. |
+| For here | 店内で | Tennai de | [N] | |
+| To go | 持ち帰りで | Mochikaeri de | [N] | |
+| A table, please | テーブル席でお願いします | Teeburu seki de onegaishimasu | [V] | |
+| The counter, please | カウンター席でお願いします | Kauntaa seki de onegaishimasu | [V] | |
+| Tatami seating, please | 座敷でお願いします | Zashiki de onegaishimasu | [V] | Zashiki means shoes off. |
 | Delicious! | おいしい！ | Oishii! | [V] | |
 | One more, please | もう一つお願いします | Mou hitotsu onegaishimasu | [V] | |
 | The same, please | 同じものをお願いします | Onaji mono o onegaishimasu | [V] | Point at the dish or glass. |
@@ -102,7 +115,9 @@ Many of the trip's cocktail bars have a seat charge. See `etiquette.md`.
 | Two people. Are there seats? | 二人ですが、空いていますか？ | Futari desu ga, aite imasu ka? | [V] | |
 | Something not too sweet | 甘くないものをお願いします | Amakunai mono o onegaishimasu | [V] | |
 | Your recommendation, please | おすすめでお願いします | Osusume de onegaishimasu | [V] | |
-| Neat / on the rocks / highball | ストレートで / ロックで / ハイボールで | Sutoreeto de / Rokku de / Haibooru de | [V] | |
+| Neat | ストレートで | Sutoreeto de | [V] | |
+| On the rocks | ロックで | Rokku de | [V] | |
+| As a highball | ハイボールで | Haibooru de | [V] | Whisky and soda. |
 | Another one, please | おかわりお願いします | Okawari onegaishimasu | [V] | |
 | Cheers! | 乾杯！ | Kanpai! | [V] | |
 | One more drink, please | もう一杯お願いします | Mou ippai onegaishimasu | [V] | |
@@ -189,5 +204,7 @@ Many of the trip's cocktail bars have a seat charge. See `etiquette.md`.
 | ★ Please call an ambulance | 救急車を呼んでください | Kyuukyuusha o yonde kudasai | [V] | |
 | Please call the police | 警察を呼んでください | Keisatsu o yonde kudasai | [V] | |
 | Where is the hospital? | 病院はどこですか？ | Byouin wa doko desu ka? | [T] | |
-| I lost my wallet / phone / passport | 財布 / 携帯 / パスポートをなくしました | Saifu / Keitai / Pasupooto o nakushimashita | [V] | |
+| I lost my wallet | 財布をなくしました | Saifu o nakushimashita | [V] | |
+| I lost my phone | 携帯をなくしました | Keitai o nakushimashita | [V] | |
+| I lost my passport | パスポートをなくしました | Pasupooto o nakushimashita | [V] | Report it at the koban, then call your embassy. |
 | Where is the police box? | 交番はどこですか？ | Kouban wa doko desu ka? | [V] | Lost property goes to the koban or the station office. |
