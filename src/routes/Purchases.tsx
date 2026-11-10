@@ -18,10 +18,11 @@ export function Purchases({ route }: { route: Route }) {
   const editId = route.params.get('edit');
   const list = usePurchases();
   const editing = editId ? list?.find((p) => p.id === editId) : undefined;
-  const tabs = [['souvenirs', 'Souvenirs'], ['claim', 'Tax-free claim log'], ['add', editId ? 'Edit' : '+ Add']] as const;
+  const tabs = [['souvenirs', 'By person'], ['claim', 'Tax refund log'], ['add', editId ? 'Edit' : '+ Add']] as const;
   return (
     <div>
-      <h1>Souvenirs & tax-free</h1>
+      <h1>Purchases & tax refund</h1>
+      <p class="small muted">Log what you buy, for yourselves or as gifts. Mark tax-free items to claim the refund when you leave Japan.</p>
       <SyncStatus link />
       <div class="chips" style="margin-top:10px">
         {tabs.map(([id, label]) => <a key={id} class={'chip' + (view === id ? ' on' : '')} href={href('purchases', { view: id })}>{label}</a>)}
@@ -95,7 +96,7 @@ function ClaimLog({ list, checklist }: { list: Purchase[]; checklist: boolean })
   const order = [...s.bags, 'No bag set', ...[...bags.keys()].filter((b) => !s.bags.includes(b) && b !== 'No bag set')];
   const claimed = items.filter((p) => p.claimed).length;
 
-  if (!items.length) return <div class="empty">No tax-free items yet. Toggle “Tax-free claim” when you add a purchase.</div>;
+  if (!items.length) return <div class="empty">No tax-free items yet. Turn on “Claim tax refund” when you add a purchase.</div>;
   return (
     <div>
       <div class="card">
@@ -204,7 +205,7 @@ function AddForm({ existing }: { existing?: Purchase }) {
           {s.recipients.map((w) => <button type="button" class={'chip' + (f.forWhom?.includes(w) ? ' on' : '')} key={w} onClick={() => toggleWho(w)} aria-pressed={!!f.forWhom?.includes(w)}>{w}</button>)}
           {!s.recipients.length && <span class="small faint">Add recipients in <a href={href('settings')}>Settings</a>.</span>}
         </div></div>
-      <label class="toggle"><span><b>Tax-free claim</b><div class="small muted">Claim the tax back at departure</div></span>
+      <label class="toggle"><span><b>Claim tax refund</b><div class="small muted">Claim the tax back at departure</div></span>
         <input type="checkbox" checked={f.taxFree} onChange={(e) => set({ taxFree: e.currentTarget.checked })} name="taxFree" /></label>
       {f.taxFree && (
         <>

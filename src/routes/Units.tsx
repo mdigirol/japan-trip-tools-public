@@ -6,7 +6,7 @@ export function Units() {
       <h1>Units</h1>
       <p class="small muted">Type in either box.</p>
       <Measurements />
-      <p class="small faint">Shoe and clothing sizes are under Shopping.</p>
+      <p class="small faint">Shoe and clothing sizes are under Shopping guide.</p>
     </div>
   );
 }

@@ -30,9 +30,9 @@ To install on an iPhone: open the site in Safari while online, Share → **Add t
 | Etiquette | Do/don't cards by place type and area, must-first |
 | Currency | Live rate (cached), manual override, quick table, calculator with 税込/税抜, units |
 | Emergency | Tap-to-call numbers, ambulance card with tonight's hotel, earthquakes, pharmacy |
-| Souvenirs & tax-free | One purchase store: souvenir view by recipient, claim log by bag, departure-day customs checklist |
+| Purchases & tax refund | One purchase store: by person (for us or gifts), tax refund log by bag, departure-day customs checklist |
 | Konbini | Offline list near each day's areas and hotel; live "near me" |
-| Signs & menus, Transit, Numbers, Shopping | Reference |
+| Signs & menus, Transit, Numbers, Shopping guide | Reference |
 
 All Japanese is a draft that hasn't had a native-speaker review yet. Dev builds show an amber dot on unreviewed strings.
 

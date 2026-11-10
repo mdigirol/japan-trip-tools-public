@@ -8,13 +8,13 @@ export const MODULES: ModuleInfo[] = [
   { path: 'etiquette', label: 'Etiquette', ic: '🙇', blurb: 'Do and don’t', ready: true },
   { path: 'currency', label: 'Currency', ic: '¥', blurb: 'Rate, table, calculator', ready: true },
   { path: 'emergency', label: 'Emergency', ic: '🚑', blurb: 'Numbers, pharmacy, earthquakes', ready: true },
-  { path: 'purchases', label: 'Souvenirs & tax-free', short: 'Souvenirs', ic: '🛍️', blurb: 'What we bought, claim log', ready: true },
+  { path: 'purchases', label: 'Purchases & tax refund', short: 'Purchases', ic: '🛍️', blurb: 'For us or gifts · tax refund log', ready: true },
   { path: 'konbini', label: 'Konbini', ic: '🏪', blurb: 'Nearest stores', ready: true },
   { path: 'decoder', label: 'Signs & menus', short: 'Signs', ic: '🔤', blurb: 'Decode words', ready: true },
   { path: 'transit', label: 'Transit', ic: '🚄', blurb: 'Tickets, IC cards, taxis', ready: true },
   { path: 'numbers', label: 'Numbers', ic: '🔢', blurb: 'Prices aloud, counters', ready: true },
   { path: 'units', label: 'Units', ic: '📏', blurb: '°C/°F, kg/lb, mL/fl oz', ready: true },
-  { path: 'shopping', label: 'Shopping', ic: '🧾', blurb: 'Tax-free rules, sizes', ready: true },
+  { path: 'shopping', label: 'Shopping guide', short: 'Shopping', ic: '🧾', blurb: 'Tax-free rules, sizes', ready: true },
   { path: 'settings', label: 'Settings', ic: '⚙️', blurb: 'Name, units, sync', ready: true }
 ];
 
