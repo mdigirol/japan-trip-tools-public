@@ -1,5 +1,7 @@
 # Japan Trip Companion (public demo)
 
+> **Retired.** This demo is no longer online, and development continues in a private repo. The code is kept here as is. Pages served a retirement page and a kill-switch service worker (`retired/`) to clear installed copies; to bring the app back, revert the deploy step in `.github/workflows/deploy.yml`.
+
 A phone-first, offline web app for a trip to Japan: what to say, do, or pay, right now.
 
 This is a public copy for testing. The itinerary in `data/sample/trip.json` is a 20-day prototype trip for friends (Tokyo → Hakone → Kyoto → Osaka → Kiso Valley → Tokyo, Oct 22–Nov 10, 2026), with its seven real hotels. Day plans are suggestions.

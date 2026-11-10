@@ -1,5 +1,7 @@
 # Japan Trip Companion — conventions
 
+**Retired (Nov 2026).** The deploy workflow publishes `retired/` (a notice page and a kill-switch `sw.js`) instead of the app. `retired/sw.js` must only delete this app's caches (`jtc-public-*` and this scope's Workbox precache), because the origin is shared with the private app; `tests/unit/retired.test.ts` guards that. Never port `retired/` to `japan-trip-tools`.
+
 Phone-first offline web app for a Japan trip. Public demo and friends' prototype: `data/sample/trip.json` is a 20-day itinerary (Oct 22–Nov 10, 2026) with real hotel names and addresses. Content notes: `context/`.
 
 ## Public repo rules

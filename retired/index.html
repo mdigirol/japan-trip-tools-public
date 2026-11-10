@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#16171a" media="(prefers-color-scheme: dark)" />
+    <meta name="robots" content="noindex" />
+    <title>Japan Companion BETA (retired)</title>
+    <style>
+      :root {
+        --bg: #faf7f2;
+        --fg: #1d1d1f;
+        --muted: #5f5b55;
+        --accent: #b7282e;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #16171a;
+          --fg: #f2f0ec;
+          --muted: #a8a49d;
+          --accent: #e5575c;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--fg);
+        font: 17px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: max(24px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+      }
+      main { max-width: 26rem; }
+      .mark { font-size: 2.5rem; color: var(--accent); margin: 0 0 8px; }
+      h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 12px; }
+      p { margin: 0 0 12px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="mark" aria-hidden="true">⛩︎</p>
+      <h1>This demo has been retired</h1>
+      <p>Japan Companion BETA was a test copy for one trip, and it's no longer online.</p>
+      <p>You can remove it from your home screen. Thanks for trying it out.</p>
+    </main>
+  </body>
+</html>

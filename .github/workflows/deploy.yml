@@ -26,19 +26,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
-        env:
-          CI: '1'
-      - run: npm run build
-        env:
-          # Feedback relay (public repo only): public values, not secrets. Set as repo variables;
-          # the GitHub token lives only in Cloudflare. See worker/feedback/README.md.
-          VITE_FEEDBACK_URL: ${{ vars.FEEDBACK_URL }}
-          VITE_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+      # RETIRED: Pages serves retired/ (a notice page and a kill-switch service worker at the app's
+      # old sw.js URL) instead of the app. To bring the app back, revert this step to the old build:
+      # e2e tests, npm run build with VITE_FEEDBACK_URL/VITE_TURNSTILE_SITE_KEY, and upload dist.
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: retired
 
   deploy:
     needs: build
